@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
-const client = new MongoClient(url);
+const client = new MongoClient(url, {useUnifiedTopology: true});
 
 const dbName = "ZoomDB";
 const colName = "channelPointData";
@@ -44,7 +44,7 @@ async function updateUser(userId, newParam) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        col.updateOne({id: userId}, {$set: newParam});
+        await col.updateOne({id: userId}, {$set: newParam});
     }
     catch(err) {
         console.log(err);
@@ -60,7 +60,7 @@ async function deleteUser(query) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        col.deleteOne(query);
+        await col.deleteOne(query);
     }
     catch(err) {
         console.log(err);
@@ -76,7 +76,7 @@ async function deleteManyByQuery(query) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        col.deleteMany(query);
+        await col.deleteMany(query);
     }
     catch(err) {
         console.log(err);
@@ -91,4 +91,4 @@ module.exports = {insertUser, retrieveUser, updateUser, deleteUser, deleteManyBy
 // insertUser({id: 35, name: "Bob", occupation: "Builder"});
 // retrieveUser(35);
 // updateUser(35, {occupation: "Unemployed"});
-// deleteUser({id: 35});
+deleteUser({id: 35});
