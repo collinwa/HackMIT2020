@@ -1,5 +1,6 @@
 import React from 'react';
-import Lobby from './Lobby'
+import Lobby from './Lobby';
+import Room from './Room';
 import {useState, useCallback} from 'react';
 
 const VideoChat = () => {
@@ -45,11 +46,7 @@ const VideoChat = () => {
   let render;
   if (token) {
     render = (
-      <div>
-        <p> Username: {username} </p>
-        <p> Room name: {roomName} </p>
-        <p> Token: {token} </p>
-      </div>
+        <Room roomName={roomName} token={token} handleLogout={handleLogout}/>
       );
   } else {
     render = (<Lobby
