@@ -141,10 +141,39 @@ button:hover {
 }
 
 #chatbox {
-  background:#000000;
-  height:100px;
-  width:100px;
+  background:#232323;
+  height:100%;
+  width:18%;
+  padding:10px;
+  margin:0 auto;
   overflow-y:auto;
+}
+
+#messages p {
+  margin:5px 0;
+  padding:0;
+}
+
+.message-container {
+  margin:5px 0;
+  color:#fff;
+}
+
+.message-container .username {
+  display:inline-block;
+  margin-right:5px;
+  font-weight:bold;
+  color:#849091;
+}
+
+.me, .username.me {
+  font-weight:bold;
+  color:cyan;
+}
+
+.message-container .username.me {
+  display:inline-block;
+  margin-right:5px;
 }
 
 video {
