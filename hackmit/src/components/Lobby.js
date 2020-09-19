@@ -1,13 +1,13 @@
 import React from 'react';
 
 const Lobby = ({
-    username, 
-    handleUsernameChange,
-    roomName,
-    handleRoomNameChange,
-    handleSubmit
+  username,
+  handleUsernameChange,
+  roomName,
+  handleRoomNameChange,
+  handleSubmit
 }) => {
-    return(
+  return (
     <form onSubmit={handleSubmit}>
       <h2>Enter a room</h2>
       <div>
@@ -31,9 +31,9 @@ const Lobby = ({
           required
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" class="lobbySubmit">Enter Room!</button>
     </form>
-    );
+  );
 };
 
 export default Lobby;

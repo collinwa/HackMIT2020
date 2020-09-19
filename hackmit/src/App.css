@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  --primary: #1f2833;
+  --secondary: #66FCF1;
+  font-family: 'Arial Black', sans-serif;
+
 }
 
 html {
@@ -9,14 +14,13 @@ html {
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
   color: #333e5a;
   min-height: 100%;
 }
 
 header {
-  background: #f0293e;
-  color: #fff;
+  background: var(--primary);
+  color: var(--secondary);
   text-align: center;
   flex-grow: 0;
   margin-bottom: 2em;
@@ -48,6 +52,7 @@ form {
 }
 
 h2 {
+  color: #0b0c10;
   font-weight: 300;
   margin-bottom: 1em;
   text-align: center;
@@ -58,6 +63,7 @@ form > div {
   margin-bottom: 1em;
 }
 form > div > label {
+  color: primary; 
   display: block;
   margin-bottom: 0.3em;
 }
@@ -70,13 +76,24 @@ form > div > input {
   border: 1px solid #333e5a;
 }
 
-button {
-  background: #333e5a;
-  color: #fff;
+.logout {
+  background: var(--secondary);
+  color: var(--primary);
   font-size: 16px;
   padding: 0.4em;
   border-radius: 6px;
-  border: 1px solid transparent;
+  border: 2px solid var(--primary);
+}
+
+.lobbySubmit {
+  background: var(--secondary);
+  color: var(--primary);
+  font-size: 16px;
+  margin-top: 1em;
+  width: 100%;
+  padding: 0.4em;
+  border-radius: 6px;
+  border: 2px solid var(--primary);
 }
 button:hover {
   filter: brightness(150%);
@@ -91,6 +108,7 @@ button:hover {
   right: 20px;
 }
 .room > h3 {
+
   text-align: center;
   font-weight: 300;
   margin-bottom: 1em;
@@ -107,7 +125,7 @@ button:hover {
   padding: 0 2em 2em;
 }
 .participant {
-  background: #333e5a;
+  background: var(--primary);
   padding: 10px;
   border-radius: 6px;
   display: inline-block;
@@ -131,7 +149,7 @@ video {
 }
 
 footer {
-  background: #333e5a;
+  background: var(--primary);
   color: #fff;
   text-align: center;
   flex-grow: 0;
