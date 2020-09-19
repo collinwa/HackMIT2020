@@ -47,7 +47,7 @@ $(function() {
             body: JSON.stringify({'username': username})
         }).then(res => res.json()).then(data => {
             // initialize chat client
-            return Twilio.Chat.Client.create(data.token)
+            return Twilio.Chat.Client.create(data.token);
         }).then(client => {
             console.log('Created chat client');
             chatClient = client;
