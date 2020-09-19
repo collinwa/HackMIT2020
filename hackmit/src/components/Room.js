@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video';
 import Chat from 'twilio-chat';
 import Participant from './Participant';
+import {retrieveUser, updateUser} from './querydb';
 
 const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
@@ -100,9 +101,9 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     const interval = setInterval(() => {
       const localParticipant = room.localParticipant;
       console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
-      room.participants.forEach(participant => {
-        console.log(`Participant "${participant.sid}" is connected to the Room`);
-      });
+      //room.participants.forEach(participant => {
+      //  console.log(`Participant "${participant.sid}" is connected to the Room`);
+      //});
     }, 5000);
     return () => clearInterval(interval);
   }, [room]);
@@ -111,6 +112,10 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     <div className="room">
       <h2>Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
+      <button onClick={() => {
+        // add points to local user
+        console.log('kekw');
+      }}>Get points!</button>
       <div className="local-participant">
         {room ? (
           <Participant
