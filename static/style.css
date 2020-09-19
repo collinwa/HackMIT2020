@@ -4,20 +4,83 @@
     display: flex;
     flex-wrap: wrap;
 }
+
 .participant {
     margin-bottom: 5px;
     margin-right: 5px;
 }
+
 .participant div {
     text-align: center;
 }
+
 .participant div:first-child {
     width: 240px;
     height: 180px;
     background-color: #ccc;
     border: 1px solid black;
 }
+
 .participant video {
     width: 100%;
     height: 100%;
+}
+
+section input {
+  clear:both;
+  display:block;
+  height:52px;
+  width:18%;
+  margin:10px auto;
+  outline:none;
+  background-color:#000000;
+  border:none;
+  border-bottom:1px solid #2B2B2A;
+  padding:0;
+  margin:10px 0.5% 0 auto;
+  font-size:0.9rem;
+  color:#eee;
+}
+
+#messages {
+  float:right;
+  background-color:#232323;
+  padding:10px;
+  height:100%;
+  width:18%;
+  margin:0 0 0 auto;
+  overflow-y:auto;
+  color:#ffffff
+}
+
+#messages p {
+  margin:5px 0;
+  padding:0;
+}
+
+.info {
+  margin:5px 0;
+  font-style:italic;
+}
+
+.message-container {
+  margin:5px 0;
+  color:#fff;
+}
+
+.message-container .username {
+  display:inline-block;
+  margin-right:5px;
+  font-weight:bold;
+  color:#849091;
+}
+
+.me, .username.me {
+  font-weight:bold;
+  color:cyan;
+}
+
+.message-container .username.me {
+  display:inline-block;
+  margin-right:5px;
 }

@@ -4,7 +4,12 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <h1>Flask & Twilio Video Conference</h1>
+
+        <section>
+            <div id="messages"></div>
+            <input id="chat-input" type="text" placeholder="Send a message" autofocus/>
+        </section>
+
         <form>
             <label for="username">Name: </label>
             <input type="text" name=”username” id="username">
@@ -15,12 +20,7 @@
             <div id="local" class="participant"><div></div><div>Me</div></div>
             <!-- more participants will be added dynamically here -->
         </div>
-
-        <section>
-            <div id="messages"></div>
-            <input id="chat-input" type="text" placeholder="Send a message" autofocus/>
-        </section>
-
+        
         <script src="//media.twiliocdn.com/sdk/js/video/releases/2.7.2/twilio-video.min.js"></script>
         <script src="https://media.twiliocdn.com/sdk/js/chat/releases/4.0.0/twilio-chat.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
