@@ -6,6 +6,7 @@ import {useState, useCallback} from 'react';
 const VideoChat = () => {
   const [username, setUsername] = useState('');
   const [roomName, setRoomName] = useState('');
+  const [channelName, setChannelName] = useState('general');
   const [token, setToken] = useState(null);
 
   // using callback to avoid redefining function if 
@@ -24,7 +25,7 @@ const VideoChat = () => {
     // prevent default behavior
     event.preventDefault();
     // fetch the video token, specify username + roomname
-    const data = await fetch('/video/token', {
+    const data = await fetch('/token', {
       method: 'POST',
       body: JSON.stringify({
         identity: username,
@@ -46,16 +47,16 @@ const VideoChat = () => {
   let render;
   if (token) {
     render = (
-        <Room roomName={roomName} token={token} handleLogout={handleLogout}/>
+        <Room username={username} roomName={roomName} channelName={channelName} token={token} handleLogout={handleLogout}/>
       );
   } else {
     render = (<Lobby
-      username={username}
-      roomName={roomName}
-      handleUsernameChange={handleUsernameChange}
-      handleRoomNameChange={handleRoomNameChange}
-      handleSubmit={handleSubmit}
-    />);
+        username={username}
+        roomName={roomName}
+        handleUsernameChange={handleUsernameChange}
+        handleRoomNameChange={handleRoomNameChange}
+        handleSubmit={handleSubmit}
+      />);
   }
 
   return render;

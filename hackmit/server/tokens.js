@@ -10,6 +10,23 @@ const generateToken = config => {
   );
 };
 
+const allToken = (identity, room, config) => {
+  const chatGrant = new ChatGrant({
+    serviceSid: config.twilio.chatService
+  });
+  let videoGrant;
+  if (typeof room !== "undefined") {
+    videoGrant = new VideoGrant({ room });
+  } else {
+    videoGrant = new VideoGrant();
+  }
+  const token = generateToken(config);
+  token.addGrant(chatGrant);
+  token.addGrant(videoGrant);
+  token.identity = identity;
+  return token;
+};
+
 const chatToken = (identity, config) => {
   const chatGrant = new ChatGrant({
     serviceSid: config.twilio.chatService
@@ -21,6 +38,9 @@ const chatToken = (identity, config) => {
 };
 
 const videoToken = (identity, room, config) => {
+  const chatGrant = new ChatGrant({
+    serviceSid: config.twilio.chatService
+  });
   let videoGrant;
   if (typeof room !== "undefined") {
     videoGrant = new VideoGrant({ room });
@@ -29,6 +49,7 @@ const videoToken = (identity, room, config) => {
   }
   const token = generateToken(config);
   token.addGrant(videoGrant);
+  token.addGrant(chatGrant);
   token.identity = identity;
   return token;
 };
@@ -51,4 +72,4 @@ const voiceToken = (identity, config) => {
   return token;
 };
 
-module.exports = { chatToken, videoToken, voiceToken };
+module.exports = { allToken, chatToken, videoToken, voiceToken };

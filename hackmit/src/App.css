@@ -122,6 +122,13 @@ button:hover {
   color: #fff;
 }
 
+#chatbox {
+  background:#000000;
+  height:100px;
+  width:100px;
+  overflow-y:auto;
+}
+
 video {
   width: 100%;
   max-width: 600px;

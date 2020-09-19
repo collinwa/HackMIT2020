@@ -2,7 +2,7 @@ const config = require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
-const { chatToken, videoToken, voiceToken } = require('./tokens');
+const { allToken, chatToken, videoToken, voiceToken } = require('./tokens');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +22,20 @@ app.get('/api/greeting', (req, res) => {
   const name = req.query.name || 'World';
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+});
+
+app.get('/token', (req, res) => {
+  const identity = req.query.identity;
+  const room = req.query.room;
+  const token = allToken(identity, room, config);
+  sendTokenResponse(token, res);
+});
+
+app.post('/token', (req, res) => {
+  const identity = req.body.identity;
+  const room = req.body.room;
+  const token = allToken(identity, room, config);
+  sendTokenResponse(token, res);
 });
 
 app.get('/chat/token', (req, res) => {
