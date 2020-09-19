@@ -5,7 +5,7 @@
 
   --primary: #1f2833;
   --secondary: #66FCF1;
-
+  font-family: 'Arial Black', sans-serif;
 
 }
 
@@ -14,7 +14,6 @@ html {
 }
 
 body {
-  font-family:  Tahoma, Geneva, Verdana, sans-serif;
   color: #333e5a;
   min-height: 100%;
 }
@@ -109,6 +108,7 @@ button:hover {
   right: 20px;
 }
 .room > h3 {
+
   text-align: center;
   font-weight: 300;
   margin-bottom: 1em;
@@ -125,7 +125,7 @@ button:hover {
   padding: 0 2em 2em;
 }
 .participant {
-  background: #333e5a;
+  background: var(--primary);
   padding: 10px;
   border-radius: 6px;
   display: inline-block;
