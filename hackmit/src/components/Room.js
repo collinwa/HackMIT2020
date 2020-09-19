@@ -8,12 +8,10 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   const [channel, setChannel] = useState(null);
   const [participants, setParticipants] = useState([]);
   const [input, setInput] = useState('');
- 
+
   const remoteParticipants = participants.map(participant => (
     <Participant key={participant.sid} participant={participant} />
   ));
-
-
 
   useEffect(() => {
     const participantConnected = participant => {
@@ -85,7 +83,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     return () => {
       setRoom(currentRoom => {
         if (currentRoom && currentRoom.localParticipant.state === 'connected') {
-          currentRoom.localParticipant.tracks.forEach(function(trackPublication) {
+          currentRoom.localParticipant.tracks.forEach(function (trackPublication) {
             trackPublication.track.stop();
           });
           currentRoom.disconnect();
@@ -100,7 +98,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   return (
     <div className="room">
       <h2>Room: {roomName}</h2>
-      <button onClick={handleLogout}>Log out</button>
+      <button onClick={handleLogout} class="logout">Log out</button>
       <div className="local-participant">
         {room ? (
           <Participant
@@ -108,8 +106,8 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
             participant={room.localParticipant}
           />
         ) : (
-          ''
-        )}
+            ''
+          )}
       </div>
       <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
