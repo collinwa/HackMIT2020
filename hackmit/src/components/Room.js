@@ -13,6 +13,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     <Participant key={participant.sid} participant={participant} />
   ));
 
+
   useEffect(() => {
     const participantConnected = participant => {
       setParticipants(prevParticipants => [...prevParticipants, participant]);
@@ -94,6 +95,17 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       });
     };
   }, [username, roomName, channelName, token]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const localParticipant = room.localParticipant;
+      console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
+      room.participants.forEach(participant => {
+        console.log(`Participant "${participant.sid}" is connected to the Room`);
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [room]);
 
   return (
     <div className="room">
