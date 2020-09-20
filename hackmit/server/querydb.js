@@ -55,9 +55,12 @@ async function updateUser(userId, newParam) {
         console.log("updateUser: connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        var currentChannelPoints = (await col.findOne({name: userId})).channelPoints
-        if (currentChannelPoints == null) {currentChannelPoints = 0}
-        await col.updateOne({name: userId}, {$set: {channelPoints: currentChannelPoints + newParam}}, {upsert: true});
+        var currentChannelPoints = (await col.findOne({name: userId}))
+        if (currentChannelPoints == null) {
+          await col.insertOne({name: userId, channelPoints: newParam});
+        } else {
+          await col.updateOne({name: userId}, {$set: {channelPoints: currentChannelPoints.channelPoints + newParam}}, {upsert: true});
+        }
     }
     catch(err) {
         console.log(err);

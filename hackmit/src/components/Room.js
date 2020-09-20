@@ -110,9 +110,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         'Content-Type': 'application/json'
         }
       }).then(async res => {
-        let data;
-        if (false) {
-          data = await fetch('/insert', {
+          const data = await fetch('/update', {
             method: 'POST',
             body: JSON.stringify({
               identity: localParticipant.identity,
@@ -122,18 +120,6 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
             'Content-Type': 'application/json'
             }
           })
-        } else {
-          data = await fetch('/update', {
-            method: 'POST',
-            body: JSON.stringify({
-              identity: localParticipant.identity,
-              newParam: 10
-            }),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-          })
-        }
         return data;
       })};
 
@@ -142,7 +128,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
       //});
-    }, 5000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [room]);
 

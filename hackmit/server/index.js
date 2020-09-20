@@ -29,8 +29,7 @@ app.get('/api/greeting', (req, res) => {
 app.post('/insert', (req, res) => {
   (async () => {
   const identity = req.body.identity;
-  // TODO: REMOVE HARDCODED INSERTBOI
-  const data = await insertUser("InsertBoi", 10);
+  const data = await insertUser(identity, 10);
   res.set('Content-Type', 'application/json');
 
   res.send(
@@ -45,8 +44,7 @@ app.post('/insert', (req, res) => {
 app.post('/update', (req, res) => {
   (async () => {
   const identity = req.body.identity;
-  // TODO: REMOVE HARDCODED ISERTBOI
-  const data = await updateUser("InsertBoi", 10);
+  const data = await updateUser(identity, 10);
   console.log(data);
   res.set('Content-Type', 'application/json');
 
@@ -61,8 +59,7 @@ app.post('/update', (req, res) => {
 app.post('/retrieve', (req, res) => {
   (async () => {
   const identity = req.body.identity;
-  // TODO: REMOVE HARDCODED INSERTBOI
-  const data = await retrieveUser("InsertBoi");
+  const data = await retrieveUser(identity);
   console.log(data);
   res.set('Content-Type', 'application/json');
   res.send(data);
