@@ -25,17 +25,17 @@ app.get('/api/greeting', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
 });
-app.put('/insert', (req, res) => {
+
+app.post('/insert', (req, res) => {
   const identity = req.body.identity;
-  const data = insertUser(identity);
+  const data = insertUser(identity, 10);
   res.set('Content-Type', 'application/json');
   res.send(data);
 });
 
 app.post('/update', (req, res) => {
   const identity = req.body.identity;
-  const newParam = req.body.newParam;
-  const data = updateUser(identity, newParam);
+  const data = updateUser(identity, 10);
   res.set('Content-Type', 'application/json');
   res.send(data);
 });

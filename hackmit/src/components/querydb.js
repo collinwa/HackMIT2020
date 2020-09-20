@@ -5,9 +5,9 @@ async function insertUser(userId, newParam) {
     const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
     const dbName = "ZoomDB";
     const colName = "channelPointData";
-
     const client = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
-    console.log(url);
+    console.log("UserID: " + userId);
+    console.log("newParam: " + newParam);
     try {
         await client.connect();
         console.log("Connected correctly to server");

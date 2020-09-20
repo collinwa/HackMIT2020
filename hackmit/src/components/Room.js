@@ -111,6 +111,8 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         'Content-Type': 'application/json'
         }
       }).then(async res => {
+        console.log(res);
+        console.log(localParticipant.identity);
         let data;
         if (!res) {
           data = await fetch('/insert', {
