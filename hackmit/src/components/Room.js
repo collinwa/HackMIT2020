@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Video from 'twilio-video';
-import Chat from 'twilio-chat';
+import Video from 'twilio-video'; import Chat from 'twilio-chat';
 import Participant from './Participant';
 const {insertUser, retrieveUser, updateUser, deleteUser, deleteManyByQuery, updateOrInsert} = require('./querydb');
 
@@ -59,7 +58,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         // Join channel
         channel.join();
         // Listen for new messages sent to the channel
-        channel.on('messageAdded', function(message) {
+        channel.on('messageAdded', function (message) {
           console.log('message added');
           printMessage(message.author, message.body);
         });
@@ -72,7 +71,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
           // Join channel
           channel.join()
           // Listen for new messages sent to the channel
-          channel.on('messageAdded', function(message) {
+          channel.on('messageAdded', function (message) {
             console.log('message added');
             printMessage(message.author, message.body);
           });
@@ -100,9 +99,47 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       const localParticipant = room.localParticipant;
-      updateOrInsert(room.localParticipant.identity, 10);
-      console.log("NICE");
-      //  console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
+
+      console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
+
+      const finaldata = async () => { await fetch('/retrieve', {
+        method: 'POST',
+        body: JSON.stringify({
+          identity: localParticipant.identity 
+        }),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      }).then(async res => {
+        let data;
+        if (!res) {
+          data = await fetch('/insert', {
+            method: 'POST',
+            body: JSON.stringify({
+              identity: localParticipant.identity,
+              newParam: 10
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+          })
+        } else {
+          data = await fetch('/update', {
+            method: 'POST',
+            body: JSON.stringify({
+              identity: localParticipant.identity,
+              newParam: 10
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+          })
+        }
+        return data;
+      })};
+
+      finaldata();
+
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
       //});
@@ -112,9 +149,10 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
 
   return (
     <div className="room">
-      <h2>Room: {roomName}</h2>
+      <div id="chatbox"></div>
+      <h2 class="roomHeader">Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
-      <button onClick={() => {
+      <button class="points" onClick={() => {
         // add points to local user
         console.log('kekw');
       }}>Get points!</button>
@@ -130,11 +168,11 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       </div>
       <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
-      <div id="chatbox"></div>
-      <input 
-        id="chat-input" 
-        type="text" 
-        placeholder="Send a message" 
+
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="Send a message"
         value={input}
         onChange={event => {
           setInput(event.target.value);
@@ -145,7 +183,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
             setInput('');
           }
         }}
-        autoFocus/>
+        autoFocus />
     </div>
   );
 };
