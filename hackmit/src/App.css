@@ -5,7 +5,7 @@
 
   --primary: #1f2833;
   --secondary: #66FCF1;
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'Helvetica Nuee', sans-serif;
 
 }
 
@@ -27,8 +27,8 @@ header {
 }
 
 h1 {
-  font-weight: 300;
-  padding: 0.4em 0;
+  font-weight: bold 300;
+  padding:0.4em 0;
 }
 
 #root {
@@ -101,11 +101,12 @@ button:hover {
 
 .room {
   position: relative;
+  right:18vw;
 }
 .room button {
   position: absolute;
-  top: 0;
-  right: 20px;
+  top: -5em;
+  right: -17vw;
 }
 .room > h3 {
 
@@ -130,6 +131,8 @@ button:hover {
   border-radius: 6px;
   display: inline-block;
   margin-right: 10px;
+  height:350px;
+  width:350px;
 }
 .participant:last-child {
   margin-right: 0;
@@ -142,17 +145,28 @@ button:hover {
 
 #chatbox {
   background:#232323;
-  height:100vh;
+  height:86vh;
   width:18vw;
   padding:10px;
   margin:0 auto;
-  float:right;
+  position:fixed;
+  top:7.0vh;
+  right:0;
+  overflow-x:auto;
   overflow-y:auto;
+  word-wrap:break-word;
 }
 
 #chatbox p {
   margin:5px 0;
   padding:0;
+}
+
+#chat-input {
+  position:fixed;
+  width:17.5vw;
+  bottom:2.86vh;
+  right:0.25vw;
 }
 
 .message-container {
@@ -190,7 +204,7 @@ footer {
   color: #fff;
   text-align: center;
   flex-grow: 0;
-  padding: 1em 0;
+  padding: 1vh 0;
 }
 
 footer a {
