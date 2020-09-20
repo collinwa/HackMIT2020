@@ -54,6 +54,7 @@ h2 {
   color: #0b0c10;
   font-weight: bold;
   font-size: 1.5rem;
+  margin-left: 10vw;
   margin-bottom: 1em;
   text-align: center;
 }
@@ -77,10 +78,11 @@ form > div > input {
 }
 
 .points {
-  margin-top: 4em;
+  margin-top: 30vh;
 }
 
 .logout {
+  margin-top: 15vh;
   padding:1em;
 }
 
@@ -105,6 +107,7 @@ button:hover {
 }
 .room button {
   width: 7em;
+  margin-left: 2vw;
   background: var(--secondary);
   color: var(--primary);
   font-size: 16px;
@@ -114,13 +117,14 @@ button:hover {
   position: absolute;
 }
 .room > h3 {
-
+  margin-left: 11vw;
   text-align: center;
-  font-weight: 300;
+  font-weight: bold;
   margin-bottom: 1em;
 }
 
 .local-participant {
+  margin-left: 8vw;
   text-align: center;
   margin-bottom: 2em;
 }
@@ -135,7 +139,7 @@ button:hover {
   padding: 10px;
   border-radius: 6px;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 10vw;
   height:350px;
   width:350px;
 }
@@ -149,6 +153,7 @@ button:hover {
 }
 
 #chatbox {
+  border-radius: 10px;
   background:#232323;
   height:80vh;
   width:25vw;
@@ -169,9 +174,15 @@ button:hover {
 
 #chat-input {
   position:fixed;
-  width:25vw;
-  bottom:10vh;
-  right:0.1vw;
+  width:24vw;
+  bottom:9.5vh;
+  right:0.6vw;
+
+  /* display: block; */
+  font-size: 12px;
+  padding: 0.4em;
+  border-radius: 6px;
+  border: 1px solid #333e5a;
 }
 
 .message-container {
