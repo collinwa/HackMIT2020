@@ -138,7 +138,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
           setInput(event.target.value);
         }}
         onKeyPress={event => {
-          if (event.key === 'Enter') {
+          if (event.key === 'Enter' && input != '') {
             channel.sendMessage(input);
             setInput('');
           }
