@@ -17,9 +17,6 @@ async function insertUser(newUser) {
     catch(err){
         console.log(err);
     }
-    finally {
-        await client.close();
-    }
 }
 
 async function retrieveUser(userId) {
@@ -28,13 +25,10 @@ async function retrieveUser(userId) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        await col.findOne({id: userId});
+        return await col.findOne({name: userId});
     }
     catch (err) {
         console.log(err);
-    }
-    finally {
-        await client.close();
     }
 }
 
@@ -44,13 +38,10 @@ async function updateUser(userId, newParam) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        await col.updateOne({id: userId}, {$set: newParam});
+        await col.updateOne({name: userId}, {$set: newParam});
     }
     catch(err) {
         console.log(err);
-    }
-    finally {
-        await client.close();
     }
 }
 
@@ -65,9 +56,6 @@ async function deleteUser(query) {
     catch(err) {
         console.log(err);
     }
-    finally {
-        await client.close();
-    }
 }
 
 async function deleteManyByQuery(query) {
@@ -81,14 +69,23 @@ async function deleteManyByQuery(query) {
     catch(err) {
         console.log(err);
     }
-    finally {
-        await client.close();
+}
+
+async function updateOrInsert(username, newParams) {
+    const qResult = await retrieveUser(username);
+    if (qResult !== null) {
+        console.log("RIP")
+        updateUser(username, newParams);
+    }
+    else {
+        console.log("POG");
+        insertUser({...{name: username}, ...newParams});
     }
 }
 
-module.exports = {insertUser, retrieveUser, updateUser, deleteUser, deleteManyByQuery};
+module.exports = {insertUser, retrieveUser, updateUser, deleteUser, deleteManyByQuery, updateOrInsert};
 
 // insertUser({id: 35, name: "Bob", occupation: "Builder"});
 // retrieveUser(35);
 // updateUser(35, {occupation: "Unemployed"});
-deleteUser({id: 35});
+// deleteUser({id: 35});
