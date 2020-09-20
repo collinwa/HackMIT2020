@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Video from 'twilio-video';
-import Chat from 'twilio-chat';
+import Video from 'twilio-video'; import Chat from 'twilio-chat';
 import Participant from './Participant';
-import {retrieveUser, updateUser} from './querydb';
+import { retrieveUser, updateUser } from './querydb';
 
 const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
@@ -59,7 +58,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         // Join channel
         channel.join();
         // Listen for new messages sent to the channel
-        channel.on('messageAdded', function(message) {
+        channel.on('messageAdded', function (message) {
           console.log('message added');
           printMessage(message.author, message.body);
         });
@@ -72,7 +71,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
           // Join channel
           channel.join()
           // Listen for new messages sent to the channel
-          channel.on('messageAdded', function(message) {
+          channel.on('messageAdded', function (message) {
             console.log('message added');
             printMessage(message.author, message.body);
           });
@@ -101,6 +100,42 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     const interval = setInterval(() => {
       const localParticipant = room.localParticipant;
       console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
+
+      const finaldata = await fetch('/retrieve', {
+        method: 'POST',
+        body: JSON.stringify({
+          identity: localParticipant.identity 
+        }),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if (!res) {
+          const data = await fetch('/insert', {
+            method: 'POST',
+            body: JSON.stringify({
+              identity: localParticipant.identity,
+              newParam: 10
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+          })
+        } else {
+          const data = await fetch('/update', {
+            method: 'POST',
+            body: JSON.stringify({
+              identity: localParticipant.identity,
+              newParam: 10
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+          })
+        }
+        return data;
+      });
+
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
       //});
@@ -110,9 +145,10 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
 
   return (
     <div className="room">
-      <h2>Room: {roomName}</h2>
+      <div id="chatbox"></div>
+      <h2 class="roomHeader">Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
-      <button id="add_points" onClick={() => {
+      <button class="points" onClick={() => {
         // add points to local user
         console.log('kekw');
       }}>Get points!</button>
@@ -128,22 +164,22 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       </div>
       <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
-      <div id="chatbox"></div>
-      <input 
-        id="chat-input" 
-        type="text" 
-        placeholder="Send a message" 
+
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="Send a message"
         value={input}
         onChange={event => {
           setInput(event.target.value);
         }}
         onKeyPress={event => {
-          if (event.key === 'Enter' && input != '') {
+          if (event.key === 'Enter' && input !== '') {
             channel.sendMessage(input);
             setInput('');
           }
         }}
-        autoFocus/>
+        autoFocus />
     </div>
   );
 };

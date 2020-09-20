@@ -2,7 +2,9 @@ const config = require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
+const { MongoClient } = require('mongodb');
 const { allToken, chatToken, videoToken, voiceToken } = require('./tokens');
+const { updateUser, insertUser, retrieveUser } = require('../src/components/querydb');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +24,25 @@ app.get('/api/greeting', (req, res) => {
   const name = req.query.name || 'World';
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+});
+app.put('/insert', (req, res) => {
+  const identity = req.body.identity;
+  const data = insertUser(identity);
+  res.set('Content-Type', 'application/json');
+  res.send(data);
+});
+app.put('/update', (req, res) => {
+  const identity = req.body.identity;
+  const newParam = req.body.newParam;
+  const data = updateUser(identity, newParam);
+  res.set('Content-Type', 'application/json');
+  res.send(data);
+});
+app.post('/retrieve', (req, res) => {
+  const identity = req.body.identity;
+  const data = retrieveUser(identity);
+  res.set('Content-Type', 'application/json');
+  res.send(data);
 });
 
 app.get('/token', (req, res) => {
