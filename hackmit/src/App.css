@@ -2,10 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   --primary: #1f2833;
   --secondary: #66FCF1;
-  font-family: 'Helvetica Nuee', sans-serif;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 
 }
 
@@ -23,7 +22,6 @@ header {
   color: var(--secondary);
   text-align: center;
   flex-grow: 0;
-  margin-bottom: 2em;
 }
 
 h1 {
@@ -42,7 +40,8 @@ h1 {
 }
 
 main {
-  background: #ffffff;
+  padding-top: 10vh;
+  background: #f2f3f4;
   flex-grow: 1;
 }
 
@@ -53,7 +52,8 @@ form {
 
 h2 {
   color: #0b0c10;
-  font-weight: 300;
+  font-weight: bold;
+  font-size: 1.5rem;
   margin-bottom: 1em;
   text-align: center;
 }
@@ -76,13 +76,12 @@ form > div > input {
   border: 1px solid #333e5a;
 }
 
+.points {
+  margin-top: 4em;
+}
+
 .logout {
-  background: var(--secondary);
-  color: var(--primary);
-  font-size: 16px;
-  padding: 0.4em;
-  border-radius: 6px;
-  border: 2px solid var(--primary);
+  padding:1em;
 }
 
 .lobbySubmit {
@@ -105,9 +104,14 @@ button:hover {
   width:82vw;
 }
 .room button {
+  width: 7em;
+  background: var(--secondary);
+  color: var(--primary);
+  font-size: 16px;
+  padding: 0.4em;
+  border-radius: 6px;
+  border: 2px solid var(--primary);
   position: absolute;
-  top: -5em;
-  right: -17vw;
 }
 .room > h3 {
 
@@ -146,9 +150,10 @@ button:hover {
 
 #chatbox {
   background:#232323;
-  height:86vh;
+  height:100%;
   width:18vw;
   padding:10px;
+  display: block;
   margin:0 auto;
   position:fixed;
   top:7.0vh;

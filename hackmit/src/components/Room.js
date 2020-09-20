@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video';
 import Chat from 'twilio-chat';
 import Participant from './Participant';
-import {retrieveUser, updateUser} from './querydb';
+import { retrieveUser, updateUser } from './querydb';
 
 const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
@@ -59,7 +59,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         // Join channel
         channel.join();
         // Listen for new messages sent to the channel
-        channel.on('messageAdded', function(message) {
+        channel.on('messageAdded', function (message) {
           console.log('message added');
           printMessage(message.author, message.body);
         });
@@ -72,7 +72,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
           // Join channel
           channel.join()
           // Listen for new messages sent to the channel
-          channel.on('messageAdded', function(message) {
+          channel.on('messageAdded', function (message) {
             console.log('message added');
             printMessage(message.author, message.body);
           });
@@ -112,7 +112,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     <div className="room">
       <h2>Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
-      <button onClick={() => {
+      <button class="points" onClick={() => {
         // add points to local user
         console.log('kekw');
       }}>Get points!</button>
@@ -129,10 +129,10 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
       <div id="chatbox"></div>
-      <input 
-        id="chat-input" 
-        type="text" 
-        placeholder="Send a message" 
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="Send a message"
         value={input}
         onChange={event => {
           setInput(event.target.value);
@@ -143,7 +143,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
             setInput('');
           }
         }}
-        autoFocus/>
+        autoFocus />
     </div>
   );
 };
