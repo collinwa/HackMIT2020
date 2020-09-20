@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video'; import Chat from 'twilio-chat';
 import Participant from './Participant';
-const {insertUser, retrieveUser, updateUser, deleteUser, deleteManyByQuery, updateOrInsert} = require('./querydb');
 
 const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
@@ -111,10 +110,9 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         'Content-Type': 'application/json'
         }
       }).then(async res => {
-        console.log(res);
-        console.log(localParticipant.identity);
         let data;
-        if (!res) {
+        const response = res.json().data_res;
+        if (!response) {
           data = await fetch('/insert', {
             method: 'POST',
             body: JSON.stringify({

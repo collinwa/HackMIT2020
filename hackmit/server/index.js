@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const { MongoClient } = require('mongodb');
 const { allToken, chatToken, videoToken, voiceToken } = require('./tokens');
-const { updateUser, insertUser, retrieveUser } = require('../src/components/querydb');
+const { updateUser, insertUser, retrieveUser } = require('./querydb');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,23 +28,42 @@ app.get('/api/greeting', (req, res) => {
 
 app.post('/insert', (req, res) => {
   const identity = req.body.identity;
-  const data = insertUser(identity, 10);
+  // TODO: REMOVE HARDCODED INSERTBOI
+  const data = insertUser("InsertBoi", 10);
   res.set('Content-Type', 'application/json');
-  res.send(data);
+
+  res.send(
+    JSON.stringify({
+      data_res: data
+    })
+  );
+
 });
 
 app.post('/update', (req, res) => {
   const identity = req.body.identity;
-  const data = updateUser(identity, 10);
+  // TODO: REMOVE HARDCODED ISERTBOI
+  const data = updateUser("InsertBoi", 10);
   res.set('Content-Type', 'application/json');
-  res.send(data);
+
+  res.send(
+    JSON.stringify({
+      data_res: data
+    })
+  );
 });
 
 app.post('/retrieve', (req, res) => {
   const identity = req.body.identity;
-  const data = retrieveUser(identity);
+  // TODO: REMOVE HARDCODED INSERTBOI
+  const data = retrieveUser("InsertBoi").then(response => response);
+  console.log(data);
   res.set('Content-Type', 'application/json');
-  res.send(data);
+  res.send(
+    JSON.stringify({
+      data_res: data
+    })
+  );
 });
 
 app.get('/token', (req, res) => {
