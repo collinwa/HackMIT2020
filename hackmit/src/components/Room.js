@@ -106,7 +106,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
       //});
-    }, 60000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [room]);
 
@@ -140,7 +140,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
           setInput(event.target.value);
         }}
         onKeyPress={event => {
-          if (event.key === 'Enter' && input != '') {
+          if (event.key === 'Enter' && input !== '') {
             channel.sendMessage(input);
             setInput('');
           }

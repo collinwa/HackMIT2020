@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
 
-const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
-
-
-const dbName = "ZoomDB";
-const colName = "channelPointData";
 
 async function insertUser(newUser) {
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
+    const dbName = "ZoomDB";
+    const colName = "channelPointData";
+
+    const client = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    console.log(url);
     try {
         await client.connect();
         console.log("Connected correctly to server");
@@ -24,7 +24,11 @@ async function insertUser(newUser) {
 }
 
 async function retrieveUser(userId) {
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
+    const dbName = "ZoomDB";
+    const colName = "channelPointData";
+
+    const client = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
     try {
         await client.connect();
         console.log("Connected correctly to server");
@@ -41,7 +45,10 @@ async function retrieveUser(userId) {
 }
 
 async function updateUser(userId, newParam) {
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
+    const dbName = "ZoomDB";
+    const colName = "channelPointData";
+    const client = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
     try {
         await client.connect();
         console.log("Connected correctly to server");
@@ -58,7 +65,10 @@ async function updateUser(userId, newParam) {
 }
 
 async function deleteUser(query) {
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
+    const dbName = "ZoomDB";
+    const colName = "channelPointData";
+    const client = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
     try {
         await client.connect();
         console.log("Connected correctly to server");
@@ -75,7 +85,10 @@ async function deleteUser(query) {
 }
 
 async function deleteManyByQuery(query) {
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
+    const dbName = "ZoomDB";
+    const colName = "channelPointData";
+    const client = await new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true});
     try {
         await client.connect();
         console.log("Connected correctly to server");
