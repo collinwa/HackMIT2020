@@ -31,13 +31,15 @@ app.put('/insert', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send(data);
 });
-app.put('/update', (req, res) => {
+
+app.post('/update', (req, res) => {
   const identity = req.body.identity;
   const newParam = req.body.newParam;
   const data = updateUser(identity, newParam);
   res.set('Content-Type', 'application/json');
   res.send(data);
 });
+
 app.post('/retrieve', (req, res) => {
   const identity = req.body.identity;
   const data = retrieveUser(identity);

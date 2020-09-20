@@ -101,7 +101,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       const localParticipant = room.localParticipant;
       console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
 
-      const finaldata = await fetch('/retrieve', {
+      const finaldata = async () => { await fetch('/retrieve', {
         method: 'POST',
         body: JSON.stringify({
           identity: localParticipant.identity 
@@ -109,9 +109,10 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         headers: {
         'Content-Type': 'application/json'
         }
-      }).then(res => {
+      }).then(async res => {
+        let data;
         if (!res) {
-          const data = await fetch('/insert', {
+          data = await fetch('/insert', {
             method: 'POST',
             body: JSON.stringify({
               identity: localParticipant.identity,
@@ -122,7 +123,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
             }
           })
         } else {
-          const data = await fetch('/update', {
+          data = await fetch('/update', {
             method: 'POST',
             body: JSON.stringify({
               identity: localParticipant.identity,
@@ -134,7 +135,9 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
           })
         }
         return data;
-      });
+      })};
+
+      finaldata();
 
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
