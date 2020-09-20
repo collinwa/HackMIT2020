@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video';
 import Chat from 'twilio-chat';
 import Participant from './Participant';
-import {retrieveUser, updateUser} from './querydb';
+const {insertUser, retrieveUser, updateUser, deleteUser, deleteManyByQuery, updateOrInsert} = require('./querydb');
 
 const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   const [room, setRoom] = useState(null);
@@ -100,11 +100,13 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       const localParticipant = room.localParticipant;
-      console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
+      updateOrInsert(room.localParticipant.identity, 10);
+      console.log("NICE");
+      //  console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
       //});
-    }, 5000);
+    }, 60000);
     return () => clearInterval(interval);
   }, [room]);
 
