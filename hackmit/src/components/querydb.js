@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 
-async function insertUser(newUser) {
+async function insertUser(userId, newParam) {
     const url = 'mongodb+srv://sahilsuneja:hackmit2020@hackmitcluster.uxzey.mongodb.net/ZoomDB?retryWrites=true&w=majority';
     const dbName = "ZoomDB";
     const colName = "channelPointData";
@@ -13,7 +13,8 @@ async function insertUser(newUser) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        await col.insertOne(newUser);
+        await col.insertOne({name: userId, channelPoints: newParam});
+        return {};
     }
     catch(err){
         console.log(err);
@@ -54,7 +55,8 @@ async function updateUser(userId, newParam) {
         console.log("Connected correctly to server");
         const db = client.db(dbName);
         const col = db.collection(colName);
-        await col.updateOne({name: userId}, {$set: newParam});
+        let currentChannelPoints = await col.findOne({name: userId}).channelPoints;
+        await col.updateOne({name: userId}, {$set: {channelPoints: currentChannelPoints + newParam}});
     }
     catch(err) {
         console.log(err);
@@ -115,7 +117,7 @@ async function updateOrInsert(username, incValue) {
         updateUser(username, {channelPoints: channelPoints});
     }
     
-}
+} 
 
 module.exports = {insertUser, retrieveUser, updateUser, deleteUser, deleteManyByQuery, updateOrInsert};
 
