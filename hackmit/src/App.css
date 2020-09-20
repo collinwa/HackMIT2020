@@ -50,11 +50,14 @@ form {
   margin: 0 auto;
 }
 
+.roomHeader{
+  margin-left: 10vw;
+}
+
 h2 {
   color: #0b0c10;
   font-weight: bold;
   font-size: 1.5rem;
-  margin-left: 10vw;
   margin-bottom: 1em;
   text-align: center;
 }

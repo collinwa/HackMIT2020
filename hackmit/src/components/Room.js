@@ -111,7 +111,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
   return (
     <div className="room">
       <div id="chatbox"></div>
-      <h2>Room: {roomName}</h2>
+      <h2 class="roomHeader">Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
       <button class="points" onClick={() => {
         // add points to local user
