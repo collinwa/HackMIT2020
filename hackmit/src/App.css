@@ -109,6 +109,13 @@ button:hover {
   top: -5em;
   right: -17vw;
 }
+
+#add_points {
+  position: absolute;
+  top:-5em;
+  left: 17vw;
+}
+
 .room > h3 {
 
   text-align: center;

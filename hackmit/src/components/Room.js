@@ -112,7 +112,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     <div className="room">
       <h2>Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
-      <button onClick={() => {
+      <button id="add_points" onClick={() => {
         // add points to local user
         console.log('kekw');
       }}>Get points!</button>
