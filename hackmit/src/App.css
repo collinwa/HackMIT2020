@@ -100,8 +100,9 @@ button:hover {
 }
 
 .room {
+  display: block;
   position: relative;
-  right:18vw;
+  width:82vw;
 }
 .room button {
   position: absolute;
