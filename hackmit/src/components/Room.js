@@ -111,8 +111,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
         }
       }).then(async res => {
         let data;
-        const response = res.json().data_res;
-        if (!response) {
+        if (false) {
           data = await fetch('/insert', {
             method: 'POST',
             body: JSON.stringify({

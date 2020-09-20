@@ -27,9 +27,10 @@ app.get('/api/greeting', (req, res) => {
 });
 
 app.post('/insert', (req, res) => {
+  (async () => {
   const identity = req.body.identity;
   // TODO: REMOVE HARDCODED INSERTBOI
-  const data = insertUser("InsertBoi", 10);
+  const data = await insertUser("InsertBoi", 10);
   res.set('Content-Type', 'application/json');
 
   res.send(
@@ -37,13 +38,16 @@ app.post('/insert', (req, res) => {
       data_res: data
     })
   );
+  })();
 
 });
 
 app.post('/update', (req, res) => {
+  (async () => {
   const identity = req.body.identity;
   // TODO: REMOVE HARDCODED ISERTBOI
-  const data = updateUser("InsertBoi", 10);
+  const data = await updateUser("InsertBoi", 10);
+  console.log(data);
   res.set('Content-Type', 'application/json');
 
   res.send(
@@ -51,19 +55,18 @@ app.post('/update', (req, res) => {
       data_res: data
     })
   );
+  })();
 });
 
 app.post('/retrieve', (req, res) => {
+  (async () => {
   const identity = req.body.identity;
   // TODO: REMOVE HARDCODED INSERTBOI
-  const data = retrieveUser("InsertBoi").then(response => response);
+  const data = await retrieveUser("InsertBoi");
   console.log(data);
   res.set('Content-Type', 'application/json');
-  res.send(
-    JSON.stringify({
-      data_res: data
-    })
-  );
+  res.send(data);
+  })();
 });
 
 app.get('/token', (req, res) => {
