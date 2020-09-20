@@ -110,6 +110,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
 
   return (
     <div className="room">
+      <div id="chatbox"></div>
       <h2>Room: {roomName}</h2>
       <button onClick={handleLogout} class="logout">Log out</button>
       <button class="points" onClick={() => {
@@ -128,7 +129,7 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
       </div>
       <h3>Remote Participants</h3>
       <div className="remote-participants">{remoteParticipants}</div>
-      <div id="chatbox"></div>
+
       <input
         id="chat-input"
         type="text"
