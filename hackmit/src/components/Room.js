@@ -101,6 +101,42 @@ const Room = ({ username, roomName, channelName, token, handleLogout }) => {
     const interval = setInterval(() => {
       const localParticipant = room.localParticipant;
       console.log(`Participant "${localParticipant.sid}" is connected to the Room`);
+
+      const finaldata = await fetch('/retrieve', {
+        method: 'POST',
+        body: JSON.stringify({
+          identity: localParticipant.identity 
+        }),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        if (!res) {
+          const data = await fetch('/insert', {
+            method: 'POST',
+            body: JSON.stringify({
+              identity: localParticipant.identity,
+              newParam: 10
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+          })
+        } else {
+          const data = await fetch('/update', {
+            method: 'POST',
+            body: JSON.stringify({
+              identity: localParticipant.identity,
+              newParam: 10
+            }),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+          })
+        }
+        return data;
+      });
+
       //room.participants.forEach(participant => {
       //  console.log(`Participant "${participant.sid}" is connected to the Room`);
       //});
